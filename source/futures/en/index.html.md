@@ -1169,7 +1169,7 @@ Creates a new order. Requires `Trading` permission
 | takeProfitTrigger       | string  | No       | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice`|
 | stopLossPrice  | double  | No       | Mandatory when creating new order with stop loss order. Indicates the trigger price       
 | stopLossTrigger       | string  | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
-| positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
+| positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) , `HEDGE` , `MULTI`                                                                                                                                                                                                                                                          |
 
 ### Response Content
 
@@ -1195,7 +1195,7 @@ Creates a new order. Requires `Trading` permission
 | deviation         | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
 | remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                                                                                                                                                                                                                                                                  |
 | positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                             |
 | positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
@@ -1268,7 +1268,7 @@ This API Requires `Trading` permission
 | clOrderID    | string | No       | Custom order Id                                                                                                                                                                   |
 | deviation    | double | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                 |
 | stealth      | double | No       | How many percent of the order is to be displayed on the orderbook.                                                                                                                |
-| positionMode | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
+| positionMode | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) , `HEDGE` , `MULTI`                                                                                                                                                                                                                                                         |
 
 ### Response Content
 
@@ -1294,7 +1294,7 @@ This API Requires `Trading` permission
 | deviation         | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                                                                                                                                                                                                                                              |
 | positionDirection | string  | Yes  | Position direction                                                                                                                                                                                                                                                                              |
 | positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                |
 
@@ -1483,7 +1483,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | deviation         | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                                                                                                                                                                                                                                              |
 | positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                              |
 | positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                |
 
@@ -1564,7 +1564,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | deviation         | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                                                                                                                                                                                                                                              |
 | positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                              |
 | positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                |
 
@@ -1704,7 +1704,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 | takeProfitOrder              | TakeProfitOrder object | No | Take profit order info |
 | stopLossOrder                | StopLossOrder object   | No | Stop loss order info |
 | closeOrder                   | bool   | Yes      | Whether it is an order to close this position |
-| positionMode                 | string   | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                     |
+| positionMode                 | string   | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                                     |
 | positionDirection            | string   | Yes      | Position direction                                                                     |
 | positionId                   | string   | Yes      | The current order belongs to the id of position.                                       |
 
@@ -1905,7 +1905,7 @@ Queries user's current position. When no symbol is specified, positions for all 
 | timestamp              | long    | Yes      | Timestamp when position was queried                                         |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info |
-| positionMode           | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                          |
+| positionMode           | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                          |
 | positionDirection      | string  | Yes      | Position direction                                                          |
 | positionId             | string  | Yes      | Position id                                                                 |
 
@@ -1975,7 +1975,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price          |
 | price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                             |
 | postOnly           | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees  |
-| positionId         | string  | No       | The position ID that you want to close. Mandatory when positionMode is `HEDGE`                          |
+| positionId         | string  | No       | The position ID that you want to close. Mandatory when positionMode is `HEDGE` or `MULTI`                          |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                         |
 
 ### Response Content
@@ -2002,7 +2002,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | deviation         | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI                                                                                                                                                                                                                                                              |
 | positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                              |
 | positionId        | string  | Yes      | Position id                                                                                                                                                                                                                                                                                     |
 
@@ -2050,7 +2050,7 @@ Query risk limit for the specified market
 }
 ```
 
-> Request (When positionMode is `HEDGE`)
+> Request (When positionMode is `HEDGE` or `MULTI`)
 
 ```json
 {
@@ -2082,7 +2082,7 @@ Changes risk limit for the specified market
 | ---                | ---     | ---      |-------------------------------------------------------------------------------------------|
 | symbol             | string  | Yes      | Market symbol                                                                             |
 | riskLimit          | long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
-| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` or `MULTI`                         |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                          |
 
 ### Response Content
@@ -2107,7 +2107,7 @@ Changes risk limit for the specified market
 }
 ```
 
-> Request (When positionMode is `HEDGE`)
+> Request (When positionMode is `HEDGE` or `MULTI`)
 
 ```json
 {
@@ -2141,7 +2141,8 @@ Change leverage values for the specified market
 | symbol             | string  | Yes      | Market symbol                                                     |
 | leverage           | double  | Yes      | Leverage value, 0 means cross maximum leverage                    |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False    |
-| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` or `MULTI` |
+| positionId         | string  | no       | The position ID that you want to change. Mandatory when positionMode is `HEDGE` or `MULTI` |
 | marginMode         | string  | no       | CROSS or ISOLATED(default)                                        |
 
 ### Response Content
@@ -2195,7 +2196,7 @@ Get leverage value for the specified market
 }
 ```
 
-> Request (When positionMode is `HEDGE`)
+> Request (When positionMode is `HEDGE` or `MULTI`)
 
 ```json
 {
@@ -2226,7 +2227,7 @@ Changes the settlement currency for the position in the current market
 | symbol             | string  | Yes      | Market symbol                                                                |
 | currency           | string  | Yes      | Settlement currency to set                                                   |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False              |
-| positionId         | string  | No       | The position ID that you want to set. Mandatory when positionMode is `HEDGE` |
+| positionId         | string  | No       | The position ID that you want to set. Mandatory when positionMode is `HEDGE` or `MULTI` |
 
 ### Response Content
 
@@ -2323,12 +2324,12 @@ Bind TP/SL with an existing position
 | Name               | Type    | Required | Description
 | ---                | ---     | ---      | --- 
 | symbol             | string  | yes       | Market symbol
-| side               | string  | yes       | "BUY" or "SELL" Mandatory when positionMode is `HEDGE`, in hedge mode, it is used to clsoe the specified position, ex: sell to close long position, buy to close short position
+| side               | string  | yes       | "BUY" or "SELL" Mandatory when positionMode is `HEDGE` or `MULTI`, in hedge mode, it is used to clsoe the specified position, ex: sell to close long position, buy to close short position
 | takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
 | takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice` |
 | stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
 | stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
-| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE or MULTI. Mandatory when positionMode is `HEDGE` or `MULTI` |
 
 ### Response Content
 
@@ -2354,7 +2355,7 @@ Bind TP/SL with an existing position
 | deviation     | double  | Yes      | Only valid for Algo |
 | remainingSize | double  | Yes      | Size left to be transacted |
 | originalSize  | double  | Yes      | Original order size |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE   |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI   |
 | positionDirection | string  | Yes      | Position direction   |
 | positionId        | string  | Yes      | Position id   |
 
@@ -2390,7 +2391,7 @@ Retrieve user's position mode
 | Name         | Type   | Required | Description       |
 | ---          | ---    | ---      | ------------------|
 | symbol       | string | Yes      | Market symbol     |
-| positionMode | string | Yes      | ONE_WAY or HEDGE  |
+| positionMode | string | Yes      | ONE_WAY or HEDGE or MULTI  |
 
 ## Change Position Mode
 
@@ -2412,7 +2413,7 @@ Changes position mode
 | Name               | Type    | Required | Description     |
 | ---                | ---     | ---      | ----------------|
 | symbol             | string  | Yes      | Market symbol   |
-| positionMode       | string  | Yes      | ONE_WAY or HEDGE|
+| positionMode       | string  | Yes      | ONE_WAY or HEDGE or MULTI|
 
 ### Response Content
 
@@ -3465,7 +3466,7 @@ All futures positions will be pushed via this topic once the position changes.
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
-| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
+| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI           |
 | positionDirection       | string  | Yes      | Position direction                           |
 | positionId              | string  | Yes      | Position id                                  |
 
@@ -3661,7 +3662,7 @@ All futures positions will be pushed via this topic once the position changes. I
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
-| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
+| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE or MULTI           |
 | positionDirection       | string  | Yes      | Position direction                           |
 | positionId              | string  | Yes      | Position id                                  |
 
